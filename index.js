@@ -254,6 +254,7 @@ client.on('message', (message) => {
         })
         .catch(console.error)
     }
+   
     if(message.content.startsWith("!뮤트")) {
       if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
         let user = message.mentions.members.first()
@@ -268,6 +269,7 @@ client.on('message', (message) => {
         message.reply("권한이 없습니다.") 
       } 
     }
+  
   } else if(message.content.startsWith('!강퇴')) {
     if(message.channel.type == 'dm') {
       return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
