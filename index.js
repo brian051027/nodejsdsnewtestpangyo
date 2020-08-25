@@ -15,9 +15,9 @@ client.on('ready', () => {
   client.user.setPresence({ game: { name: '!명령어를 쳐보세요.' }, status: 'online' })
 
   let state_list = [
-    '!help를 쳐보세요.',
-    '메렁메렁',
-    '에베베베베',
+    '!명령어를 쳐보세요.',
+    '차재훈 바보',
+    '나는야 따까리',
   ]
   let state_list_index = 1;
   let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
@@ -62,6 +62,22 @@ client.on("messageUpdate", (message) => {
 client.on('message', (message) => {
   MessageSave(message)
   if(message.author.bot) return;
+
+  if(message.content.startsWith('!역할추가')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    if(message.content.split('<@').length == 3) {
+      if(message.content.split(' ').length != 3) return;
+
+      var userId = message.content.split(' ')[1].match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi).join('')
+      var role = message.content.split(' ')[2].match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi).join('')
+
+      message.member.guild.members.find(x => x.id == userId).addRole(role);
+    }
+  }
 
   if(message.content == 'ping') {
     return message.reply('pong');
@@ -126,7 +142,7 @@ client.on('message', (message) => {
       {name: '!전체공지2', desc: 'dm으로 전체 embed 형식으로 공지 보내기'},
       {name: '!청소', desc: '텍스트 지움'},
       {name: '!초대코드', desc: '해당 채널의 초대 코드 표기'},
-      {name: '!초대코드2', desc: '봇이 들어가있는 모든 채널의 초대 코드 표기'},,
+      {name: '!이름 주사위', desc: '우리 이름 랜덤으로 나옴'},
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
@@ -237,6 +253,50 @@ client.on('message', (message) => {
         })
         .catch(console.error)
     }
+  } else if(message.content.startsWith('!강퇴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+    
+    message.member.guild.members.find(x => x.id == userId).kick(kick_msg)
+  } else if(message.content.startsWith('!밴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+
+    message.member.guild.members.find(x => x.id == userId).ban(kick_msg)
+  } else if(message.content.startsWith('!주사위')) {
+    let min = 1;
+    let max = 6;
+    let dice_num = parseInt(Math.random() * (max - min) + min);
+    return message.reply(`${dice_num}가 나왔습니다.`);
+  } else if(message.content.startsWith('!이름 주사위')) {
+    let arr = [
+      '설준서',
+      '차재훈',
+      '전승우',
+      '이인겸',
+      '이혜겸',
+      '차준서',
+    ]
+    let min = 0;
+    let max = arr.length;
+    let index = parseInt(Math.random() * (max - min) + min);
+    return message.reply(`${arr[index]}가 나왔습니다.`);
   }
 });
 
