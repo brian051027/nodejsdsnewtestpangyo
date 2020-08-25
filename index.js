@@ -102,8 +102,6 @@ client.on('ready', () => {
     }
   
     if(message.content.startsWith('!청소')) {
-      if(checkPermission(message)) return
-  
       var clearLine = message.content.slice('!청소 '.length);
       var isNum = !isNaN(clearLine)
   
@@ -138,15 +136,6 @@ client.on('ready', () => {
       }
     }
   });
-  
-  function checkPermission(message) {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-      message.channel.send(`<@${message.author.id}> ` + "명령어를 수행할 관리자 권한을 소지하고 있지않습니다.")
-      return true;
-    } else {
-      return false;
-    }
-  }
   
   function changeCommandStringLength(str, limitLen = 8) {
     let tmp = str;
@@ -239,7 +228,6 @@ client.on('message', (message) => {
   }
 
   if(message.content.startsWith('!전체공지')) {
-    if(checkPermission(message)) return
     if(message.member != null) { // 채널에서 공지 쓸 때
       let contents = message.content.slice('!전체공지'.length);
       message.member.guild.members.array().forEach(x => {
@@ -253,15 +241,6 @@ client.on('message', (message) => {
     }
   }
 });
-
-function checkPermission(message) {
-  if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-    message.channel.send(`<@${message.author.id}> ` + "명령어를 수행할 관리자 권한을 소지하고 있지않습니다.")
-    return true;
-  } else {
-    return false;
-  }
-}
 
 function changeCommandStringLength(str, limitLen = 8) {
   let tmp = str;
