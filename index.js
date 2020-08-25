@@ -79,8 +79,8 @@ client.on('message', (message) => {
     }
   }
 
-  if(message.content == 'ping') {
-    return message.reply('pong');
+  if(message.content == '!테스트') {
+    return message.reply('정상 작동 한다 ㅋㅋㄹ');
   }
 
   if(message.content == '!봇 정보') {
@@ -122,7 +122,7 @@ client.on('message', (message) => {
       .setAuthor('설준서', img, 'https://search.pstatic.net/sunny/?src=http%3A%2F%2Fimage.samsung.com%2Fau%2Fsmartphones%2Fgalaxy-note8%2Fimages%2Fgalaxy-note8_design_planet_start.jpg&type=b400')
       .setThumbnail(img)
       .addBlankField()
-      .addField('Inline field title', 'Some value here')
+      .addField('[new [A to Z] 디스코드 봇 만들기. 12편 DB 만들기](<https://youtu.be/M9Kr6YsDah4>)')
       .addField('Inline field title', 'Some value here', true)
       .addField('Inline field title', 'Some value here', true)
       .addField('Inline field title', 'Some value here', true)
@@ -136,12 +136,13 @@ client.on('message', (message) => {
     let helpImg = 'https://images-ext-1.discordapp.net/external/RyofVqSAVAi0H9-1yK6M8NGy2grU5TWZkLadG-rwqk0/https/i.imgur.com/EZRAPxR.png';
     let commandList = [
       {name: '!명령어', desc: '도움말'},
-      {name: 'ping', desc: '봇 테스트용'},
+      {name: '!봇 정보', desc: '봇 사용량 등 정보'},
+      {name: '!테스트', desc: '봇 작동테스트'},
       {name: '!옵지', desc: 'op.gg바로가기'},
       {name: '!전체공지', desc: 'dm으로 전체 공지 보내기'},
-      {name: '!전체공지2', desc: 'dm으로 전체 embed 형식으로 공지 보내기'},
       {name: '!청소', desc: '텍스트 지움'},
       {name: '!초대코드', desc: '해당 채널의 초대 코드 표기'},
+      {name: '!주사위', desc: '1~6까지 랜덤 숫자 나옴'},
       {name: '!이름 주사위', desc: '우리 이름 랜덤으로 나옴'},
     ];
     let commandStr = '';
@@ -252,6 +253,20 @@ client.on('message', (message) => {
           AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "개의 메시지를 삭제했습니다. (이 메세지는 잠시 후에 사라집니다.)");
         })
         .catch(console.error)
+    }
+    if(message.content.startsWith("!뮤트")) {
+      if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
+        let user = message.mentions.members.first()
+        let mute = message.guild.roles.cache.find(r => r.id === '747658085383929969').id
+        if(!user) return message.reply("!뮤트 @멘션")
+        user.roles.add(mute).then(member => {
+          message.channel.send(`${member.displayName} 에게 뮤트를 먹였습니다.`)
+        }).catch(() => {
+          message.channel.send(`역할을 지급하지 못했습니다.`)
+        })
+      } else { 
+        message.reply("권한이 없습니다.") 
+      } 
     }
   } else if(message.content.startsWith('!강퇴')) {
     if(message.channel.type == 'dm') {
