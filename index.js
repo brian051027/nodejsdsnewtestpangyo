@@ -13,6 +13,28 @@ const byeChannelComment = "";
 client.on('ready', () => {
   console.log('켰다.');
   client.user.setPresence({ game: { name: '!명령어를 쳐보세요.' }, status: 'online' })
+
+  let state_list = [
+    '!help를 쳐보세요.',
+    '메렁메렁',
+    '에베베베베',
+  ]
+  let state_list_index = 1;
+  let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
+
+  function changeState() {
+    setTimeout(() => {
+      console.log( '상태 변경 -> ', state_list[state_list_index] );
+      client.user.setPresence({ game: { name: state_list[state_list_index] }, status: 'online' })
+      state_list_index += 1;
+      if(state_list_index >= state_list.length) {
+        state_list_index = 0;
+      }
+      changeState()
+    }, change_delay);
+  }
+
+  changeState();
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -190,7 +212,7 @@ client.on('message', (message) => {
     if(isNum && (clearLine <= 0 || 100 < clearLine)) {
       message.channel.send("1부터 100까지의 숫자만 입력해주세요.")
       return;
-    } else if(!isNum) { // c @나긋해 3
+    } else if(!isNum) { // c @설준서 3
       if(message.content.split('<@').length == 2) {
         if(isNaN(message.content.split(' ')[2])) return;
 
@@ -217,15 +239,6 @@ client.on('message', (message) => {
     }
   }
 });
-
-function checkPermission(message) {
-  if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-    message.channel.send(`<@${message.author.id}> ` + "명령어를 수행할 관리자 권한을 소지하고 있지않습니다.")
-    return true;
-  } else {
-    return false;
-  }
-}
 
 function changeCommandStringLength(str, limitLen = 8) {
   let tmp = str;
