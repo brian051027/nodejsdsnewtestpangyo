@@ -6,10 +6,6 @@
   "scripts": {
     "r": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MKachi/CoronaBot.git"
-  },
   "dependencies": {
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
