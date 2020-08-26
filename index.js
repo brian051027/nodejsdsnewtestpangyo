@@ -122,7 +122,7 @@ client.on('message', (message) => {
       .setAuthor('설준서', img, 'https://search.pstatic.net/sunny/?src=http%3A%2F%2Fimage.samsung.com%2Fau%2Fsmartphones%2Fgalaxy-note8%2Fimages%2Fgalaxy-note8_design_planet_start.jpg&type=b400')
       .setThumbnail(img)
       .addBlankField()
-      .addField('[new [A to Z] 디스코드 봇 만들기. 12편 DB 만들기](<https://youtu.be/M9Kr6YsDah4>)')
+      .addField('[차재훈 op.gg 프로필](<https://www.op.gg/summoner/userName=%EC%95%8A%EC%9D%B4%EC%99%B8%EC%95%8A%EB%88%8C%EB%A0%A4>)')
       .addField('Inline field title', 'Some value here', true)
       .addField('Inline field title', 'Some value here', true)
       .addField('Inline field title', 'Some value here', true)
