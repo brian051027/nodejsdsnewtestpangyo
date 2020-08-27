@@ -16,8 +16,6 @@ client.on('ready', () => {
 
   let state_list = [
     '!명령어를 쳐보세요.',
-    '차재훈 바보',
-    '나는야 따까리',
   ]
   let state_list_index = 1;
   let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
