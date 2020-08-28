@@ -121,7 +121,7 @@ client.on('message', (message) => {
       .setThumbnail(img)
       .addBlankField()
       .addField('[차재훈 op.gg 프로필](<https://www.op.gg/summoner/userName=%EC%95%8A%EC%9D%B4%EC%99%B8%EC%95%8A%EB%88%8C%EB%A0%A4>)')
-      .addField('Inline field title', 'Some value here', true)
+      .addField('[차재훈 op.gg 프로필](<https://www.op.gg/summoner/userName=%EC%95%8A%EC%9D%B4%EC%99%B8%EC%95%8A%EB%88%8C%EB%A0%A4>)', true)
       .addField('Inline field title', 'Some value here', true)
       .addField('Inline field title', 'Some value here', true)
       .addField('Inline field title', 'Some value here1\nSome value here2\nSome value here3\n')
