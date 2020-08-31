@@ -138,6 +138,7 @@ client.on('message', (message) => {
       {name: '!테스트', desc: '봇 작동테스트'},
       {name: '!롤전적 (너네 닉네임)', desc: '롤전적'},
       {name: '!롤체전적 (너네 닉네임)', desc: '롤체전적'},
+      {name: '!코로나', desc: '코로나 현황'},
       {name: '!전체공지', desc: 'dm으로 전체 공지 보내기'},
       {name: '!청소', desc: '텍스트 지움'},
       {name: '!초대코드', desc: '해당 채널의 초대 코드 표기'},
